@@ -1814,25 +1814,32 @@
     }
 
     @media (max-width: 640px) {
-      .top-bar .container {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 6px;
-        font-size: 0.82rem;
+      /* ===== ẨN TOP-CONTACT TRÊN MOBILE ===== */
+      .top-contact {
+        display: none;
       }
 
-      .top-contact {
-        flex-direction: column;
-        gap: 4px;
+      .top-bar .container {
+        justify-content: center;
+        padding: 8px 14px;
       }
 
       .top-social {
-        margin-top: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        gap: 4px;
       }
 
       .top-social a {
         margin-left: 0;
-        margin-right: 16px;
+        margin-right: 12px;
+        font-size: 0.95rem;
+      }
+
+      .top-social a:last-child {
+        margin-right: 0;
       }
 
       section {
@@ -2794,28 +2801,21 @@
 
     /* ============================================
        TOAST - FIX TRIỆT ĐỂ
-       Luôn tự ẩn sau 2s, kể cả khi bấm liên tục
     ============================================ */
     let toastTimer = null;
 
     function showToast(msg) {
-      // 1. Cập nhật nội dung
       toastMsgEl.textContent = msg;
 
-      // 2. Clear timer cũ
       if (toastTimer) {
         clearTimeout(toastTimer);
         toastTimer = null;
       }
 
-      // 3. Force reflow để reset animation
       toastEl.classList.remove('show');
       void toastEl.offsetHeight;
-
-      // 4. Hiện toast
       toastEl.classList.add('show');
 
-      // 5. Tự ẩn sau 2 giây
       toastTimer = setTimeout(() => {
         toastEl.classList.remove('show');
         toastTimer = null;
