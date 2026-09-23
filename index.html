@@ -1,0 +1,3233 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HMB Agency – Cửa hàng đồ chơi trẻ em</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: system-ui, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: #ffffff;
+      color: #1e1e2a;
+      line-height: 1.5;
+    }
+
+    body.no-scroll {
+      overflow: hidden;
+    }
+
+    :root {
+      --primary: #0b2a4a;
+      --primary-light: #1e3f60;
+      --accent: #e63946;
+      --accent-dark: #c52836;
+      --gray-bg: #f8f9fc;
+      --border-light: #e2e8f0;
+      --text-muted: #4a5568;
+      --white: #ffffff;
+      --success: #2a9d8f;
+      --shadow-sm: 0 8px 20px rgba(0,0,0,0.04);
+      --shadow-md: 0 12px 28px rgba(0,0,0,0.06);
+      --shadow-lg: 0 24px 48px rgba(0,0,0,0.18);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* ===== TOP BAR ===== */
+    .top-bar {
+      background: var(--primary);
+      color: var(--white);
+      padding: 8px 0;
+      font-size: 0.9rem;
+    }
+
+    .top-bar .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .top-contact {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .top-contact i {
+      margin-right: 8px;
+      color: var(--accent);
+    }
+
+    .top-social a {
+      color: var(--white);
+      margin-left: 16px;
+      font-size: 1rem;
+      transition: 0.2s;
+    }
+
+    .top-social a:hover {
+      color: var(--accent);
+    }
+
+    /* ===== MAIN HEADER ===== */
+    .main-header {
+      background: var(--white);
+      box-shadow: var(--shadow-sm);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .main-header .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 20px;
+      gap: 20px;
+      position: relative;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+
+    .logo-icon {
+      background: var(--accent);
+      color: var(--white);
+      width: 46px;
+      height: 46px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      font-weight: 800;
+      box-shadow: 0 4px 8px rgba(230, 57, 70, 0.3);
+      letter-spacing: -1px;
+    }
+
+    .logo-text h2 {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--primary);
+      letter-spacing: -0.5px;
+      line-height: 1.1;
+    }
+
+    .logo-text span {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      letter-spacing: 0.4px;
+    }
+
+    /* ---- NAV LINKS (desktop) ---- */
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      font-weight: 600;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--primary);
+      font-size: 1rem;
+      transition: 0.2s;
+      border-bottom: 2px solid transparent;
+      padding-bottom: 4px;
+      cursor: pointer;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+    }
+
+    /* ---- HEADER ACTIONS ---- */
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      flex-shrink: 0;
+    }
+
+    .header-actions > i,
+    .header-actions .cart-icon-wrap {
+      font-size: 1.3rem;
+      color: var(--primary);
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .header-actions > i:hover {
+      color: var(--accent);
+    }
+
+    .cart-icon-wrap {
+      position: relative;
+    }
+
+    .cart-icon-wrap i {
+      font-size: 1.4rem;
+    }
+
+    .cart-badge {
+      position: absolute;
+      top: -8px;
+      right: -10px;
+      background: var(--accent);
+      color: #fff;
+      font-size: 0.7rem;
+      font-weight: 700;
+      min-width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 5px;
+      box-shadow: 0 2px 6px rgba(230, 57, 70, 0.5);
+    }
+
+    .cart-badge.bump {
+      animation: bump 0.35s ease;
+    }
+
+    @keyframes bump {
+      0% { transform: scale(1); }
+      40% { transform: scale(1.4); }
+      100% { transform: scale(1); }
+    }
+
+    /* ---- SEARCH ---- */
+    .search-wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .search-toggle {
+      background: transparent;
+      border: none;
+      color: var(--primary);
+      font-size: 1.3rem;
+      cursor: pointer;
+      transition: 0.2s;
+      padding: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .search-toggle:hover {
+      color: var(--accent);
+    }
+
+    .search-box {
+      position: absolute;
+      top: calc(100% + 16px);
+      right: 0;
+      width: 380px;
+      max-width: calc(100vw - 40px);
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: var(--shadow-lg);
+      padding: 16px;
+      z-index: 250;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-8px);
+      transition: 0.25s ease;
+      border: 1px solid var(--border-light);
+    }
+
+    .search-box.active {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .search-input-wrap {
+      display: flex;
+      align-items: center;
+      background: var(--gray-bg);
+      border-radius: 30px;
+      padding: 0 16px;
+      border: 2px solid transparent;
+      transition: 0.2s;
+    }
+
+    .search-input-wrap:focus-within {
+      border-color: var(--accent);
+      background: #fff;
+    }
+
+    .search-input-wrap i {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-right: 10px;
+    }
+
+    .search-input-wrap input {
+      flex: 1;
+      border: none;
+      outline: none;
+      background: transparent;
+      padding: 12px 0;
+      font-size: 0.95rem;
+      color: var(--primary);
+      font-family: inherit;
+    }
+
+    .search-input-wrap input::placeholder {
+      color: #94a3b8;
+    }
+
+    .search-results {
+      margin-top: 12px;
+      max-height: 340px;
+      overflow-y: auto;
+    }
+
+    .search-results::-webkit-scrollbar {
+      width: 5px;
+    }
+
+    .search-results::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 10px;
+    }
+
+    .search-result-item {
+      display: flex;
+      gap: 12px;
+      padding: 10px;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: 0.15s;
+      align-items: center;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .search-result-item:hover {
+      background: var(--gray-bg);
+    }
+
+    .search-result-img {
+      width: 52px;
+      height: 52px;
+      border-radius: 10px;
+      overflow: hidden;
+      flex-shrink: 0;
+      background: #eef2f7;
+    }
+
+    .search-result-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .search-result-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .search-result-info h5 {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 3px;
+      line-height: 1.3;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
+    }
+
+    .search-result-info span {
+      font-size: 0.82rem;
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .search-empty {
+      text-align: center;
+      padding: 24px 10px;
+      color: var(--text-muted);
+      font-size: 0.88rem;
+    }
+
+    .search-empty i {
+      font-size: 2rem;
+      color: #cbd5e1;
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .search-hint {
+      font-size: 0.78rem;
+      color: #94a3b8;
+      margin-top: 10px;
+      text-align: center;
+    }
+
+    /* ---- HAMBURGER ---- */
+    .hamburger {
+      display: none;
+      background: transparent;
+      border: none;
+      font-size: 1.5rem;
+      color: var(--primary);
+      cursor: pointer;
+      padding: 4px;
+      transition: 0.2s;
+    }
+
+    .hamburger:hover {
+      color: var(--accent);
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      background: linear-gradient(135deg, #f0f4fc 0%, #e6edf7 100%);
+      padding: 50px 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero .container {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+
+    .hero-content {
+      flex: 1 1 400px;
+    }
+
+    .hero-badge {
+      background: rgba(230, 57, 70, 0.12);
+      color: var(--accent);
+      padding: 6px 16px;
+      border-radius: 40px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      display: inline-block;
+      margin-bottom: 20px;
+      letter-spacing: 0.3px;
+    }
+
+    .hero-content h1 {
+      font-size: 2.8rem;
+      font-weight: 800;
+      line-height: 1.2;
+      color: var(--primary);
+      margin-bottom: 20px;
+    }
+
+    .hero-content h1 span {
+      color: var(--accent);
+      border-bottom: 4px solid rgba(230, 57, 70, 0.3);
+    }
+
+    .hero-content p {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      margin-bottom: 30px;
+      max-width: 550px;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 40px;
+      margin-top: 30px;
+    }
+
+    .stat-item h3 {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--primary);
+    }
+
+    .stat-item p {
+      font-size: 0.9rem;
+      margin-bottom: 0;
+      color: var(--text-muted);
+    }
+
+    .hero-image {
+      flex: 1 1 380px;
+      min-height: 360px;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+      background: #fff;
+    }
+
+    .hero-image img {
+      width: 100%;
+      height: 100%;
+      min-height: 360px;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+
+    .hero-image:hover img {
+      transform: scale(1.05);
+    }
+
+    /* ===== SECTION CHUNG ===== */
+    section {
+      padding: 70px 0;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .section-title h2 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 12px;
+    }
+
+    .section-title .subtitle {
+      color: var(--text-muted);
+      font-size: 1rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .section-title .accent-line {
+      width: 70px;
+      height: 4px;
+      background: var(--accent);
+      margin: 16px auto 0;
+      border-radius: 4px;
+    }
+
+    /* ===== DANH MỤC ===== */
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+      gap: 24px;
+    }
+
+    .category-card {
+      background: var(--white);
+      border: 1px solid var(--border-light);
+      border-radius: 20px;
+      overflow: hidden;
+      text-align: center;
+      transition: 0.25s;
+      box-shadow: var(--shadow-sm);
+      cursor: pointer;
+    }
+
+    .category-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--accent);
+      box-shadow: var(--shadow-md);
+    }
+
+    .category-card .cat-img {
+      width: 100%;
+      height: 140px;
+      overflow: hidden;
+      background: #eef2f7;
+    }
+
+    .category-card .cat-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+
+    .category-card:hover .cat-img img {
+      transform: scale(1.08);
+    }
+
+    .category-card h4 {
+      font-weight: 700;
+      color: var(--primary);
+      font-size: 1rem;
+      padding: 16px 10px;
+    }
+
+    /* ===== SẢN PHẨM ===== */
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 26px;
+    }
+
+    .product-card {
+      background: var(--white);
+      border: 1px solid var(--border-light);
+      border-radius: 20px;
+      overflow: hidden;
+      transition: 0.25s;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .product-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--accent);
+    }
+
+    .product-card.hidden {
+      display: none;
+    }
+
+    .product-img {
+      width: 100%;
+      height: 200px;
+      overflow: hidden;
+      background: #f1f5f9;
+      position: relative;
+    }
+
+    .product-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+
+    .product-card:hover .product-img img {
+      transform: scale(1.06);
+    }
+
+    .product-badge {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: var(--accent);
+      color: #fff;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 20px;
+      letter-spacing: 0.3px;
+    }
+
+    .product-badge.new {
+      background: var(--success);
+    }
+
+    .product-info {
+      padding: 16px 16px 20px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .product-info h4 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 4px;
+      line-height: 1.3;
+      min-height: 42px;
+    }
+
+    .product-price {
+      font-weight: 800;
+      font-size: 1.15rem;
+      color: var(--accent);
+      margin: 8px 0 14px;
+    }
+
+    .product-price del {
+      font-size: 0.85rem;
+      color: #94a3b8;
+      font-weight: 400;
+      margin-left: 6px;
+    }
+
+    .btn-product {
+      background: transparent;
+      border: 2px solid var(--primary);
+      color: var(--primary);
+      padding: 9px 14px;
+      border-radius: 40px;
+      font-weight: 700;
+      font-size: 0.82rem;
+      cursor: pointer;
+      transition: 0.2s;
+      margin-top: auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .btn-product:hover {
+      background: var(--primary);
+      color: var(--white);
+    }
+
+    .btn-product.added {
+      background: var(--success);
+      border-color: var(--success);
+      color: #fff;
+    }
+
+    /* ---- NO RESULT ---- */
+    .no-result {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 50px 20px;
+      color: var(--text-muted);
+    }
+
+    .no-result i {
+      font-size: 3rem;
+      color: #cbd5e1;
+      margin-bottom: 14px;
+      display: block;
+    }
+
+    .no-result strong {
+      color: var(--primary);
+    }
+
+    /* ===== KHUYẾN MÃI ===== */
+    .promo-section {
+      background: linear-gradient(135deg, #fff5f5 0%, #ffe8e8 100%);
+    }
+
+    .promo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 26px;
+    }
+
+    .promo-card {
+      background: var(--white);
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: 0.25s;
+      border: 1px solid transparent;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .promo-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--accent);
+    }
+
+    .promo-tag {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: var(--accent);
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 800;
+      padding: 6px 14px;
+      border-radius: 30px;
+      letter-spacing: 0.5px;
+      z-index: 2;
+      box-shadow: 0 4px 10px rgba(230, 57, 70, 0.4);
+    }
+
+    .promo-img {
+      height: 200px;
+      overflow: hidden;
+      background: #f1f5f9;
+    }
+
+    .promo-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+
+    .promo-card:hover .promo-img img {
+      transform: scale(1.08);
+    }
+
+    .promo-content {
+      padding: 22px 22px 26px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .promo-content h4 {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+
+    .promo-content p {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+      line-height: 1.55;
+    }
+
+    .promo-condition {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.83rem;
+      color: var(--accent);
+      font-weight: 700;
+      margin-bottom: 18px;
+    }
+
+    .btn-promo {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 12px 22px;
+      border-radius: 40px;
+      font-weight: 700;
+      font-size: 0.88rem;
+      cursor: pointer;
+      transition: 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      box-shadow: 0 4px 12px rgba(230, 57, 70, 0.3);
+      margin-top: auto;
+    }
+
+    .btn-promo:hover {
+      background: var(--accent-dark);
+      transform: translateY(-2px);
+    }
+
+    /* ===== LỢI ÍCH ===== */
+    .benefits {
+      background: var(--gray-bg);
+      border-radius: 40px 40px 0 0;
+    }
+
+    .benefit-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 30px;
+    }
+
+    .benefit-item {
+      background: var(--white);
+      padding: 30px 20px;
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid transparent;
+      transition: 0.2s;
+    }
+
+    .benefit-item:hover {
+      border-color: var(--accent);
+    }
+
+    .benefit-item i {
+      font-size: 2.4rem;
+      color: var(--accent);
+      margin-bottom: 18px;
+    }
+
+    .benefit-item h4 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+
+    .benefit-item p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    /* ===== TIN TỨC ===== */
+    .news-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 30px;
+    }
+
+    .news-card {
+      background: var(--white);
+      border-radius: 20px;
+      border: 1px solid var(--border-light);
+      overflow: hidden;
+      transition: 0.2s;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .news-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .news-img {
+      height: 180px;
+      overflow: hidden;
+      background: #d9e2ef;
+    }
+
+    .news-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+
+    .news-card:hover .news-img img {
+      transform: scale(1.06);
+    }
+
+    .news-content {
+      padding: 20px;
+    }
+
+    .news-content .date {
+      font-size: 0.8rem;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .news-content h4 {
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 10px;
+      font-size: 1.05rem;
+    }
+
+    .news-content p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+    }
+
+    .news-content a {
+      color: var(--accent);
+      font-weight: 600;
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+
+    /* ===== LIÊN HỆ ===== */
+    .contact-section {
+      background: var(--primary);
+      color: var(--white);
+      border-radius: 40px 40px 0 0;
+    }
+
+    .contact-section .section-title h2,
+    .contact-section .section-title .subtitle {
+      color: var(--white);
+    }
+
+    .contact-section .section-title .subtitle {
+      opacity: 0.8;
+    }
+
+    .contact-grid {
+      display: flex;
+      gap: 40px;
+      flex-wrap: wrap;
+      background: rgba(255, 255, 255, 0.06);
+      padding: 40px;
+      border-radius: 30px;
+      backdrop-filter: blur(2px);
+    }
+
+    .contact-info {
+      flex: 1 1 280px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+    }
+
+    .contact-item i {
+      font-size: 1.5rem;
+      color: var(--accent);
+      width: 32px;
+      margin-top: 4px;
+    }
+
+    .contact-item h4 {
+      font-size: 1rem;
+      margin-bottom: 4px;
+      font-weight: 700;
+    }
+
+    .contact-item p {
+      font-size: 0.95rem;
+      opacity: 0.85;
+    }
+
+    .contact-form {
+      flex: 1 1 320px;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 14px 18px;
+      border-radius: 14px;
+      border: none;
+      margin-bottom: 16px;
+      font-size: 0.95rem;
+      background: rgba(255, 255, 255, 0.12);
+      color: var(--white);
+      outline: 1px solid rgba(255, 255, 255, 0.2);
+      transition: 0.2s;
+      font-family: inherit;
+    }
+
+    .contact-form input::placeholder,
+    .contact-form textarea::placeholder {
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+      outline: 2px solid var(--accent);
+      background: rgba(255, 255, 255, 0.18);
+    }
+
+    .contact-form button {
+      background: var(--accent);
+      color: var(--white);
+      border: none;
+      padding: 14px 30px;
+      border-radius: 40px;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.2s;
+      width: 100%;
+      box-shadow: 0 6px 14px rgba(230, 57, 70, 0.4);
+    }
+
+    .contact-form button:hover {
+      background: var(--accent-dark);
+      transform: translateY(-2px);
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: #071c30;
+      color: #cbd5e1;
+      padding: 40px 0 20px;
+      font-size: 0.9rem;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 30px;
+      margin-bottom: 40px;
+    }
+
+    .footer-col h4 {
+      color: var(--white);
+      font-weight: 700;
+      margin-bottom: 18px;
+      font-size: 1.1rem;
+      position: relative;
+      padding-bottom: 8px;
+    }
+
+    .footer-col h4::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 40px;
+      height: 3px;
+      background: var(--accent);
+      border-radius: 3px;
+    }
+
+    .footer-col p {
+      margin-bottom: 12px;
+      line-height: 1.6;
+    }
+
+    .footer-col a {
+      color: #cbd5e1;
+      text-decoration: none;
+      display: block;
+      margin-bottom: 8px;
+      transition: 0.2s;
+    }
+
+    .footer-col a:hover {
+      color: var(--accent);
+      padding-left: 4px;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    .footer-social a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px;
+      height: 38px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 50%;
+      color: var(--white);
+      transition: 0.2s;
+      margin-bottom: 0;
+    }
+
+    .footer-social a:hover {
+      background: var(--accent);
+      transform: translateY(-3px);
+      padding-left: 0;
+    }
+
+    .footer-contact-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .footer-contact-item i {
+      color: var(--accent);
+      font-size: 1rem;
+      width: 20px;
+    }
+
+    .footer-contact-item a {
+      display: inline;
+      margin-bottom: 0;
+    }
+
+    .footer-contact-item a:hover {
+      padding-left: 0;
+    }
+
+    .copyright {
+      text-align: center;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 20px;
+      color: #94a3b8;
+      font-size: 0.85rem;
+    }
+
+    /* ============================================
+       POPUP
+    ============================================ */
+    .popup-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(7, 28, 48, 0.55);
+      backdrop-filter: blur(3px);
+      z-index: 999;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    .popup-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .cart-popup {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.95);
+      width: 92%;
+      max-width: 560px;
+      max-height: 88vh;
+      background: #fff;
+      border-radius: 24px;
+      box-shadow: var(--shadow-lg);
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
+    }
+
+    .cart-popup.active {
+      opacity: 1;
+      visibility: visible;
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    .cart-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 24px;
+      background: var(--primary);
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .cart-header h3 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .cart-header h3 i {
+      color: var(--accent);
+    }
+
+    .cart-close {
+      background: rgba(255, 255, 255, 0.12);
+      border: none;
+      color: #fff;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: 0.2s;
+    }
+
+    .cart-close:hover {
+      background: var(--accent);
+      transform: rotate(90deg);
+    }
+
+    .cart-body {
+      padding: 18px 24px;
+      overflow-y: auto;
+      flex: 1;
+      min-height: 120px;
+    }
+
+    .cart-body::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .cart-body::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 10px;
+    }
+
+    .cart-empty {
+      text-align: center;
+      padding: 40px 10px;
+      color: var(--text-muted);
+    }
+
+    .cart-empty i {
+      font-size: 3.5rem;
+      color: #cbd5e1;
+      margin-bottom: 14px;
+      display: block;
+    }
+
+    .cart-item {
+      display: flex;
+      gap: 14px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border-light);
+      align-items: center;
+    }
+
+    .cart-item:last-child {
+      border-bottom: none;
+    }
+
+    .cart-item-img {
+      width: 70px;
+      height: 70px;
+      border-radius: 12px;
+      overflow: hidden;
+      flex-shrink: 0;
+      background: #eef2f7;
+    }
+
+    .cart-item-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .cart-item-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .cart-item-info h5 {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 4px;
+      line-height: 1.3;
+    }
+
+    .cart-item-info .item-price {
+      font-size: 0.85rem;
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .cart-item-actions {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 8px;
+    }
+
+    .qty-control {
+      display: flex;
+      align-items: center;
+      border: 1.5px solid var(--border-light);
+      border-radius: 30px;
+      overflow: hidden;
+    }
+
+    .qty-control button {
+      background: transparent;
+      border: none;
+      width: 28px;
+      height: 28px;
+      font-size: 0.8rem;
+      color: var(--primary);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: 0.2s;
+      font-weight: 700;
+    }
+
+    .qty-control button:hover {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .qty-control span {
+      min-width: 30px;
+      text-align: center;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .cart-item-remove {
+      background: transparent;
+      border: none;
+      color: #94a3b8;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 2px 0;
+    }
+
+    .cart-item-remove:hover {
+      color: var(--accent);
+    }
+
+    .cart-item-total {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--primary);
+      white-space: nowrap;
+    }
+
+    .cart-footer {
+      padding: 18px 24px 22px;
+      border-top: 1px solid var(--border-light);
+      background: #fbfcfe;
+      flex-shrink: 0;
+    }
+
+    .cart-total-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .cart-total-row span {
+      font-size: 1rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .cart-total-row strong {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--accent);
+    }
+
+    .cart-actions {
+      display: flex;
+      gap: 12px;
+    }
+
+    .btn-clear-cart {
+      background: transparent;
+      border: 2px solid var(--border-light);
+      color: var(--text-muted);
+      padding: 12px 18px;
+      border-radius: 40px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .btn-clear-cart:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .btn-checkout {
+      flex: 1;
+      background: var(--accent);
+      border: none;
+      color: #fff;
+      padding: 12px 20px;
+      border-radius: 40px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      box-shadow: 0 4px 12px rgba(230, 57, 70, 0.35);
+    }
+
+    .btn-checkout:hover {
+      background: var(--accent-dark);
+      transform: translateY(-2px);
+    }
+
+    /* ---- SUCCESS POPUP ---- */
+    .success-popup {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.9);
+      width: 92%;
+      max-width: 440px;
+      background: #fff;
+      border-radius: 28px;
+      box-shadow: var(--shadow-lg);
+      z-index: 1100;
+      padding: 40px 32px 32px;
+      text-align: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), visibility 0.3s ease;
+    }
+
+    .success-popup.active {
+      opacity: 1;
+      visibility: visible;
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    .success-icon {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #2a9d8f, #21867a);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 22px;
+      box-shadow: 0 10px 26px rgba(42, 157, 143, 0.35);
+      animation: successPop 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    @keyframes successPop {
+      0% { transform: scale(0); }
+      60% { transform: scale(1.15); }
+      100% { transform: scale(1); }
+    }
+
+    .success-icon i {
+      font-size: 2.6rem;
+      color: #fff;
+    }
+
+    .success-popup h3 {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 10px;
+    }
+
+    .success-popup p {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+      line-height: 1.55;
+    }
+
+    .success-order-code {
+      background: var(--gray-bg);
+      border-radius: 14px;
+      padding: 14px 18px;
+      margin: 18px 0 22px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.9rem;
+    }
+
+    .success-order-code span {
+      color: var(--text-muted);
+    }
+
+    .success-order-code strong {
+      color: var(--accent);
+      font-weight: 800;
+      letter-spacing: 0.5px;
+    }
+
+    .success-total {
+      font-size: 1.05rem;
+      color: var(--primary);
+      font-weight: 700;
+      margin-bottom: 24px;
+    }
+
+    .success-total strong {
+      color: var(--accent);
+      font-size: 1.3rem;
+    }
+
+    .btn-success-close {
+      width: 100%;
+      background: var(--accent);
+      border: none;
+      color: #fff;
+      padding: 14px 24px;
+      border-radius: 40px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: 0.2s;
+      box-shadow: 0 6px 16px rgba(230, 57, 70, 0.35);
+    }
+
+    .btn-success-close:hover {
+      background: var(--accent-dark);
+      transform: translateY(-2px);
+    }
+
+    /* ===== TOAST ===== */
+    .toast {
+      position: fixed;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%) translateY(120%);
+      background: var(--primary);
+      color: #fff;
+      padding: 14px 24px;
+      border-radius: 40px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+      z-index: 1200;
+      transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+      pointer-events: none;
+      max-width: 90vw;
+    }
+
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .toast i {
+      color: var(--success);
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+
+    /* ============================================
+       MOBILE NAV MENU (hamburger drawer)
+    ============================================ */
+    .mobile-nav-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(7, 28, 48, 0.5);
+      backdrop-filter: blur(2px);
+      z-index: 200;
+      opacity: 0;
+      visibility: hidden;
+      transition: 0.3s ease;
+    }
+
+    .mobile-nav-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .mobile-nav {
+      position: fixed;
+      top: 0;
+      right: -320px;
+      width: 300px;
+      max-width: 85vw;
+      height: 100vh;
+      background: #fff;
+      z-index: 300;
+      box-shadow: -8px 0 30px rgba(0,0,0,0.15);
+      transition: right 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+    }
+
+    .mobile-nav.active {
+      right: 0;
+    }
+
+    .mobile-nav-header {
+      background: var(--primary);
+      color: #fff;
+      padding: 22px 22px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    .mobile-nav-header .mobile-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .mobile-nav-header .mobile-logo .logo-icon {
+      width: 38px;
+      height: 38px;
+      font-size: 1.05rem;
+      border-radius: 10px;
+    }
+
+    .mobile-nav-header .mobile-logo h3 {
+      font-size: 1.15rem;
+      font-weight: 800;
+    }
+
+    .mobile-nav-close {
+      background: rgba(255, 255, 255, 0.12);
+      border: none;
+      color: #fff;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: 0.2s;
+    }
+
+    .mobile-nav-close:hover {
+      background: var(--accent);
+      transform: rotate(90deg);
+    }
+
+    .mobile-nav-links {
+      padding: 14px 0;
+      flex: 1;
+    }
+
+    .mobile-nav-links a {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 15px 22px;
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.98rem;
+      border-left: 4px solid transparent;
+      transition: 0.2s;
+      cursor: pointer;
+    }
+
+    .mobile-nav-links a i {
+      width: 20px;
+      text-align: center;
+      color: var(--accent);
+      font-size: 1rem;
+    }
+
+    .mobile-nav-links a:hover,
+    .mobile-nav-links a.active {
+      background: var(--gray-bg);
+      border-left-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .mobile-nav-footer {
+      padding: 18px 22px 26px;
+      border-top: 1px solid var(--border-light);
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .mobile-nav-footer .m-contact {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .mobile-nav-footer .m-contact i {
+      color: var(--accent);
+      width: 18px;
+    }
+
+    .mobile-nav-footer .m-contact a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    /* ============================================
+       RESPONSIVE
+    ============================================ */
+    @media (max-width: 900px) {
+      /* Hamburger hiện */
+      .hamburger {
+        display: flex;
+      }
+
+      /* Ẩn nav desktop */
+      .nav-links {
+        display: none;
+      }
+
+      /* Header layout mobile */
+      .main-header .container {
+        padding: 12px 16px;
+        gap: 12px;
+      }
+
+      .logo-text h2 {
+        font-size: 1.15rem;
+      }
+
+      .logo-text span {
+        font-size: 0.7rem;
+      }
+
+      .logo-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 1.05rem;
+      }
+
+      .header-actions {
+        gap: 14px;
+        margin-left: auto;
+      }
+
+      .header-actions .search-toggle,
+      .header-actions .cart-icon-wrap {
+        font-size: 1.15rem;
+      }
+
+      .cart-icon-wrap i {
+        font-size: 1.2rem;
+      }
+
+      .search-box {
+        width: 320px;
+        right: -60px;
+      }
+
+      .hero-content h1 {
+        font-size: 2.2rem;
+      }
+
+      .hero-stats {
+        gap: 24px;
+      }
+
+      .contact-grid {
+        padding: 28px;
+      }
+    }
+
+    /* === MOBILE: 2 sản phẩm / hàng, kích thước cố định === */
+    @media (max-width: 640px) {
+      .top-bar .container {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+        font-size: 0.82rem;
+      }
+
+      .top-contact {
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .top-social {
+        margin-top: 4px;
+      }
+
+      .top-social a {
+        margin-left: 0;
+        margin-right: 16px;
+      }
+
+      section {
+        padding: 50px 0;
+      }
+
+      .container {
+        padding: 0 14px;
+      }
+
+      .hero {
+        padding: 30px 0;
+      }
+
+      .hero-content h1 {
+        font-size: 1.65rem;
+      }
+
+      .hero-content p {
+        font-size: 0.95rem;
+      }
+
+      .hero-stats {
+        gap: 18px;
+      }
+
+      .stat-item h3 {
+        font-size: 1.5rem;
+      }
+
+      .stat-item p {
+        font-size: 0.8rem;
+      }
+
+      .section-title h2 {
+        font-size: 1.5rem;
+      }
+
+      .section-title .subtitle {
+        font-size: 0.9rem;
+      }
+
+      /* Search box mobile */
+      .search-box {
+        position: fixed;
+        top: 80px;
+        left: 14px;
+        right: 14px;
+        width: auto;
+        max-width: none;
+      }
+
+      /* ====== LƯỚI SẢN PHẨM: 2 CỘT CỐ ĐỊNH ====== */
+      .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+      }
+
+      .product-card {
+        border-radius: 16px;
+      }
+
+      .product-img {
+        height: 130px;
+      }
+
+      .product-badge {
+        font-size: 0.62rem;
+        padding: 3px 7px;
+        top: 7px;
+        left: 7px;
+      }
+
+      .product-info {
+        padding: 10px 10px 12px;
+      }
+
+      .product-info h4 {
+        font-size: 0.82rem;
+        min-height: 34px;
+        margin-bottom: 2px;
+      }
+
+      .product-price {
+        font-size: 0.95rem;
+        margin: 6px 0 10px;
+      }
+
+      .product-price del {
+        font-size: 0.72rem;
+        margin-left: 4px;
+      }
+
+      .btn-product {
+        font-size: 0.72rem;
+        padding: 7px 8px;
+        gap: 4px;
+      }
+
+      /* Danh mục: 2 cột */
+      .category-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+      }
+
+      .category-card .cat-img {
+        height: 110px;
+      }
+
+      .category-card h4 {
+        font-size: 0.85rem;
+        padding: 10px 6px;
+      }
+
+      /* Khuyến mãi: 1 cột */
+      .promo-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      /* Tin tức: 1 cột */
+      .news-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      /* Lợi ích: 2 cột */
+      .benefit-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 14px;
+      }
+
+      .benefit-item {
+        padding: 20px 12px;
+      }
+
+      .benefit-item i {
+        font-size: 1.8rem;
+        margin-bottom: 12px;
+      }
+
+      .benefit-item h4 {
+        font-size: 0.9rem;
+      }
+
+      .benefit-item p {
+        font-size: 0.78rem;
+      }
+
+      /* Cart popup mobile */
+      .cart-popup {
+        width: 95%;
+        max-height: 92vh;
+      }
+
+      .cart-item-img {
+        width: 58px;
+        height: 58px;
+      }
+
+      .cart-header,
+      .cart-body,
+      .cart-footer {
+        padding-left: 16px;
+        padding-right: 16px;
+      }
+
+      .cart-header h3 {
+        font-size: 1rem;
+      }
+
+      .cart-item-info h5 {
+        font-size: 0.82rem;
+      }
+
+      .cart-actions {
+        flex-direction: column;
+      }
+
+      .btn-clear-cart {
+        width: 100%;
+      }
+
+      .success-popup {
+        padding: 32px 22px 26px;
+      }
+
+      .success-popup h3 {
+        font-size: 1.25rem;
+      }
+
+      .success-icon {
+        width: 76px;
+        height: 76px;
+      }
+
+      .success-icon i {
+        font-size: 2.2rem;
+      }
+    }
+
+    /* Màn hình siêu nhỏ */
+    @media (max-width: 360px) {
+      .product-grid {
+        gap: 10px;
+      }
+
+      .product-img {
+        height: 115px;
+      }
+
+      .product-info h4 {
+        font-size: 0.78rem;
+        min-height: 32px;
+      }
+
+      .product-price {
+        font-size: 0.88rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== TOP BAR ===== -->
+  <div class="top-bar">
+    <div class="container">
+      <div class="top-contact">
+        <span><i class="fas fa-phone-alt"></i> 0855 555 140</span>
+        <span><i class="fas fa-envelope"></i> hmb.agency.group@gmail.com</span>
+        <span><i class="fas fa-map-pin"></i> 123 Nguyễn Huệ, Q.1, TP.HCM</span>
+      </div>
+      <div class="top-social">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-youtube"></i></a>
+        <a href="#"><i class="fab fa-tiktok"></i></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== MAIN HEADER ===== -->
+  <header class="main-header">
+    <div class="container">
+      <div class="logo">
+        <div class="logo-icon">HMB</div>
+        <div class="logo-text">
+          <h2>HMB Agency</h2>
+          <span>Đồ chơi an toàn & sáng tạo</span>
+        </div>
+      </div>
+
+      <nav class="nav-links">
+        <a href="#trang-chu" class="nav-link active">Trang chủ</a>
+        <a href="#san-pham" class="nav-link">Sản phẩm</a>
+        <a href="#khuyen-mai" class="nav-link">Khuyến mãi</a>
+        <a href="#tin-tuc" class="nav-link">Tin tức</a>
+        <a href="#lien-he" class="nav-link">Liên hệ</a>
+      </nav>
+
+      <div class="header-actions">
+        <!-- SEARCH -->
+        <div class="search-wrap">
+          <button class="search-toggle" id="searchToggle" aria-label="Tìm kiếm">
+            <i class="fas fa-search"></i>
+          </button>
+          <div class="search-box" id="searchBox">
+            <div class="search-input-wrap">
+              <i class="fas fa-search"></i>
+              <input type="text" id="searchInput" placeholder="Tìm đồ chơi... (VD: xếp hình, robot)" autocomplete="off">
+            </div>
+            <div class="search-results" id="searchResults"></div>
+            <div class="search-hint">Nhập tên đồ chơi để tìm nhanh</div>
+          </div>
+        </div>
+
+        <!-- CART -->
+        <div class="cart-icon-wrap" id="cartIconBtn" title="Xem giỏ hàng">
+          <i class="fas fa-shopping-cart"></i>
+          <span class="cart-badge" id="cartBadge">0</span>
+        </div>
+
+        <!-- HAMBURGER (mobile) -->
+        <button class="hamburger" id="hamburgerBtn" aria-label="Mở menu">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero" id="trang-chu">
+    <div class="container">
+      <div class="hero-content">
+        <span class="hero-badge">🎁 Khuyến mãi mùa hè – Giảm đến 30%</span>
+        <h1>Thế giới đồ chơi <span>an toàn</span> & phát triển trí tuệ</h1>
+        <p>Hơn 2000+ sản phẩm đồ chơi trẻ em chính hãng, chất liệu an toàn, giúp bé vừa học vừa chơi mỗi ngày.</p>
+        <div class="hero-stats">
+          <div class="stat-item">
+            <h3>2000+</h3>
+            <p>Sản phẩm</p>
+          </div>
+          <div class="stat-item">
+            <h3>50K+</h3>
+            <p>Khách hàng</p>
+          </div>
+          <div class="stat-item">
+            <h3>4.9⭐</h3>
+            <p>Đánh giá</p>
+          </div>
+        </div>
+      </div>
+      <div class="hero-image">
+        <img src="https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?auto=format&fit=crop&w=800&q=80" alt="Đồ chơi trẻ em">
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== DANH MỤC ===== -->
+  <section>
+    <div class="container">
+      <div class="section-title">
+        <h2>Danh mục đồ chơi</h2>
+        <div class="accent-line"></div>
+        <p class="subtitle">Chọn loại đồ chơi phù hợp với độ tuổi và sở thích của bé</p>
+      </div>
+      <div class="category-grid">
+        <div class="category-card">
+          <div class="cat-img">
+            <img src="https://images.unsplash.com/photo-1587654780291-39c9404d746b?auto=format&fit=crop&w=500&q=80" alt="Đồ chơi xếp hình">
+          </div>
+          <h4>Đồ chơi xếp hình</h4>
+        </div>
+        <div class="category-card">
+          <div class="cat-img">
+            <img src="https://images.unsplash.com/photo-1594736797933-d0501ba2fe65?auto=format&fit=crop&w=500&q=80" alt="Xe điều khiển">
+          </div>
+          <h4>Xe & điều khiển</h4>
+        </div>
+        <div class="category-card">
+          <div class="cat-img">
+            <img src="https://images.unsplash.com/photo-1611996575749-79a3a250f948?auto=format&fit=crop&w=500&q=80" alt="Board game">
+          </div>
+          <h4>Board game</h4>
+        </div>
+        <div class="category-card">
+          <div class="cat-img">
+            <img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=500&q=80" alt="Sáng tạo nghệ thuật">
+          </div>
+          <h4>Sáng tạo & nghệ thuật</h4>
+        </div>
+        <div class="category-card">
+          <div class="cat-img">
+            <img src="https://images.unsplash.com/photo-1535378917042-10a22c95931a?auto=format&fit=crop&w=500&q=80" alt="Robot STEM">
+          </div>
+          <h4>Robot & STEM</h4>
+        </div>
+        <div class="category-card">
+          <div class="cat-img">
+            <img src="https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?auto=format&fit=crop&w=500&q=80" alt="Đồ chơi sơ sinh">
+          </div>
+          <h4>Đồ chơi sơ sinh</h4>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 20 SẢN PHẨM ===== -->
+  <section id="san-pham" style="background: var(--gray-bg);">
+    <div class="container">
+      <div class="section-title">
+        <h2>Sản phẩm nổi bật</h2>
+        <div class="accent-line"></div>
+        <p class="subtitle">20 món đồ chơi được các bé yêu thích nhất tại HMB Agency</p>
+      </div>
+      <div class="product-grid" id="productGrid">
+
+        <div class="product-card" data-name="Bộ xếp hình 1000 chi tiết">
+          <div class="product-img">
+            <span class="product-badge">-29%</span>
+            <img src="https://images.unsplash.com/photo-1587654780291-39c9404d746b?auto=format&fit=crop&w=500&q=80" alt="Bộ xếp hình 1000 chi tiết">
+          </div>
+          <div class="product-info">
+            <h4>Bộ xếp hình 1000 chi tiết</h4>
+            <div class="product-price">320.000đ <del>450.000đ</del></div>
+            <button class="btn-product" data-id="1" data-name="Bộ xếp hình 1000 chi tiết" data-price="320000" data-img="https://images.unsplash.com/photo-1587654780291-39c9404d746b?auto=format&fit=crop&w=500&q=80"><i class="fas fa-cart-plus"></i> Thêm vào giỏ</button>
+          </div>
+        </div>
+
+        <div class="product-card" data-name="Xe điều khiển từ xa 2.4G">
+          <div class="product-img">
+            <span class="product-badge">-19%</span>
+            <img src="https://images.unsplash.com/photo-1594736797933-d0501ba2fe65?auto=format&fit=crop&w=500&q=80" alt="Xe điều khiển từ xa 2.4G">
+          </div>
+          <div class="product-info">
+            <h4>Xe điều khiển từ xa 2.4G</h4>
+            <div class="product-price">580.000đ <del>720.000đ</del></div>
+            <button class="btn-product" data-id="2" data-name="Xe điều khiển từ xa 2.4G" data-price="580000" data-img="https://images.unsplash.com/photo-1594736797933-d0501ba2fe65?auto=format&fit=crop&w=500&q=80"><i class="fas fa-cart-plus"></i> Thêm vào giỏ</button>
+          </div>
+        </div>
+
+        <div class="product-card" data-name="Robot thông minh STEM">
+          <div class="product-img">
+            <span class="product-badge new">Mới</span>
+            <img src="https://images.unsplash.com/photo-1535378917042-10a22c95931a?auto=format&fit=crop&w=500&q=80" alt="Robot thông minh STEM">
+          </div>
+          <div class="product-info">
+            <h4>Robot thông minh STEM</h4>
+            <div class="product-price">890.000đ <del>1.150.000đ</del></div>
+            <button class="btn-product" data-id="3" data-name="Robot thông minh STEM" data-price="890000" data-img="https://images.unsplash.com/photo-1535378917042-10a22c95931a?auto=format&fit=crop&w=500&q=80"><i class="fas fa-cart-plus"></i> Thêm vào giỏ</button>
+          </div>
+        </div>
+
+        <div class="product-card" data-name="Bộ màu vẽ 150 chi tiết">
+          <div class="product-img">
+            <span class="product-badge">-25%</span>
+            <img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=500&q=80" alt="Bộ màu vẽ 150 chi tiết">
+          </div>
+          <div class="product-info">
+            <h4>Bộ màu vẽ 150 chi tiết</h4>
+            <div class="product-price">210.000đ <del>280.000đ</del></div>
+            <button class="btn-product" data-id="4" data-name="Bộ màu vẽ 150 chi tiết" data-price="210000" data-img="https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=500&q=80"><i class="fas fa-cart-plus"></i> Thêm vào giỏ</button>
+          </div>
+        </div>
+
+        <div class="product-card" data-name="Búp bê công chúa cao cấp">
+          <div class="product-img">
+            <span class="product-badge">-15%</span>
+            <img src="https://images.unsplash.com/photo-1558060370-d644479cb6f7?auto=format&fit=crop&w=500&q=80" alt="Búp bê công chúa">
+          </div>
+          <div class="product-info">
+            <h4>Búp bê công chúa cao cấp</h4>
+            <div class="product-price">420.000đ <del>495.000đ</del></div>
+            <button class="btn-product" data-id="5" data-name="Búp bê công chúa cao cấp" data-price="420000" data-img="https://images.unsplash.com/photo-1558060370-d644479cb6f7?auto=format&fit=crop&w=500&q=80"><i class="fas fa-cart-plus"></i> Thêm vào giỏ</button>
+          </div>
+        </div>
+
+        <div class="product-card" data-name="Gấu bông Teddy 60cm">
+          <div class="product-img">
+            <span class="product-badge new">Mới</span>
+            <img src="https://images.unsplash.com/photo-1558877385-81a1c7e67d72?auto=format&fit=crop&w=500&q=80" alt="Gấu bông Teddy">
+          </div>
+          <div class="product-info">
+            <h4>Gấu bông Teddy 60cm</h4>
+            <div class="product-price">350.000đ <del>420.000đ</del></div>
+            <button class="btn-product" data-id="6" data-name="Gấu bông Teddy 60cm" data-price="350000" data-img="https://images.unsplash.com/photo-1558877385-81a1c7e67d72?auto=format&fit=crop&w=500&q=80"><i class="fas fa-cart-plus"></i> Thêm vào giỏ</button>
+          </div>
+        </div>
+
+        <div class="product-card" data-name="Board game gia đình">
+          <div class="product-img">
+            <span class="product-badge">-30%</span>
+            <img src="https://images.unsplash.com/photo-1611996575749-79a3a250f948?auto=format&fit=crop&w=500&q=80" alt="Board game gia đình">
+          </div>
+          <div class="product-info">
+            <h4>Board game gia đình</h4>
+            <div class="product-price">280.000đ <del>400.000đ</del></div>
+            <button class="btn-product" data-id="7" data-name="Board game gia đình" data-price="280000" data-img="https://images.unsplash.com/photo-1611996575749-79a3a250f948?auto=format&fit=crop&w=500&q=80"><i class="fas fa-cart-plus"></i> Thêm vào giỏ</button>
+          </div>
+        </div>
+
+        <div class="product-card" data-name="Bộ đồ chơi nấu ăn">
+          <div class="product-img">
+            <span class="product-badge">-22%</span>
+            <img src="https://images.unsplash.com/photo-1581235720704-06d3acfcb36f?auto=format&fit=crop&w=500&q=80" alt="Đồ chơi nấu ăn">
+          </div>
+          <div class="product-info">
+            <h4>Bộ đồ chơi nấu ăn</h4>
+            <div class="product-price">390.000đ <del>500.000đ</del></div>
+            <button class="btn-product" data-id="8" data-name="Bộ đồ chơi nấu ăn" data-price="390000" data-img="https://images.unsplash.com/photo-1581235720704-06d3acfcb36f?auto=format&fit=crop&w=500&q=80"><i class="fas fa-cart-plus"></i> Thêm vào giỏ</button>
+          </div>
+        </div>
+
+        <div class="product-card" data-name="Bộ khối gỗ xây dựng">
+          <div class="product-img">
+            <span class="product-badge new">Mới</span>
+            <img src="https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?auto=format&fit=crop&w=500&q=80" alt="Bộ khối gỗ xây dựng">
+          </div>
+          <div class="product-info">
+            <h4>Bộ khối gỗ xây dựng</h4>
+            <div class="product-price">260.000đ <del>320.000đ</del></div>
+            <button class="btn-product" data-id="9" data-name="Bộ khối gỗ xây dựng" data-price="260000" data-img="https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?auto=format&fit=crop&w=500&q=80"><i class="fas fa-cart-plus"></i> Thêm vào giỏ</button>
+          </div>
+        </div>
+
+        <div class="product-card" data-name="Đồ chơi câu cá nam châm">
+          <div class="product-img">
+            <span class="product-badge">-18%</span>
+            <img src="https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?auto=format&fit=crop&w=500&q=80" alt="Đồ chơi câu cá">
+          </div>
+          <div class="product-info">
+            <h4>Đồ chơi câu cá nam châm</h4>
+            <div class="product-price">180.000đ <del>220.000đ</del></div>
+            <button class="btn-product" data-id="10" data-name="Đồ chơi câu cá nam châm" data-price="180000" data-img="https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?auto=format&fit=crop&w=500&q=80"><i class="fas fa-cart-plus"></i> Thêm vào giỏ</button>
+          </div>
+        </div>
+
+        <div class="product-card" data-name="Xe đua mô hình thể thao">
+          <div class="product-img">
+            <span class="product-badge">-27%</span>
+            <img src="https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?auto=format&fit=crop&w=500&q=80" alt="Xe đua mô hình">
+          </div>
+          <div class="product-info">
+            <h4>Xe đua mô hình thể thao</h4>
+            <div class="product-price">450.000đ <del>620.000đ</del></div>
+            <button class="btn-product" data-id="11" data-name="Xe đua mô hình thể thao" data-price="450000" data-img="https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?auto=format&fit=crop&w=500&q=80"><i class="fas fa-cart-plus"></i> Thêm vào giỏ</button>
+          </div>
+        </div>
+
+        <div class="product-card" data-name="Đồ chơi treo nôi sơ sinh">
+          <div class="product-img">
+            <span class="product-badge new">Mới</span>
+            <img src="https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?auto=format&fit=crop&w=500&q=80" alt="Đồ chơi treo nôi">
+          </div>
+          <div class="product-info">
+            <h4>Đồ chơi treo nôi sơ sinh</h4>
+            <div class="product-price">240.000đ <del>300.000đ</del></div>
+            <button class="btn-product" data-id="12" data-name="Đồ chơi treo nôi sơ sinh" data-price="240000" data-img="https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?auto=format&fit=crop&w=500&q=80"><i class="fas fa-cart-plus"></i> Thêm vào giỏ</button>
+          </div>
+        </div>
+
+        <div class="product-card" data-name="Bộ xếp hình động vật">
+          <div class="product-img">
+            <span class="product-badge">-20%</span>
+            <img src="https://images.unsplash.com/photo-1545558014-8692077e9b5c?auto=format&fit=crop&w=500&q=80" alt="Bộ xếp hình động vật">
+          </div>
+          <div class="product-info">
+            <h4>Bộ xếp hình động vật</h4>
+            <div class="product-price">195.000đ <del>245.000đ</del></div>
+            <button class="btn-product" data-id="13" data-name="Bộ xếp hình động vật" data-price="195000" data-img="https://images.unsplash.com/photo-1545558014-8692077e9b5c?auto=format&fit=crop&w=500&q=80"><i class="fas fa-cart-plus"></i> Thêm vào giỏ</button>
+          </div>
+        </div>
+
+        <div class="product-card" data-name="Đàn piano đồ chơi cho bé">
+          <div class="product-img">
+            <span class="product-badge">-35%</span>
+            <img src="https://images.unsplash.com/photo-1606167668584-78701c57f13d?auto=format&fit=crop&w=500&q=80" alt="Đàn piano đồ chơi">
+          </div>
+          <div class="product-info">
+            <h4>Đàn piano đồ chơi cho bé</h4>
+            <div class="product-price">520.000đ <del>800.000đ</del></div>
+            <button class="btn-product" data-id="14" data-name="Đàn piano đồ chơi cho bé" data-price="520000" data-img="https://images.unsplash.com/photo-1606167668584-78701c57f13d?auto=format&fit=crop&w=500&q=80"><i class="fas fa-cart-plus"></i> Thêm vào giỏ</button>
+          </div>
+        </div>
+
+        <div class="product-card" data-name="Bóng đá đồ chơi mini">
+          <div class="product-img">
+            <span class="product-badge new">Mới</span>
+            <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=500&q=80" alt="Bóng đá đồ chơi">
+          </div>
+          <div class="product-info">
+            <h4>Bóng đá đồ chơi mini</h4>
+            <div class="product-price">150.000đ <del>190.000đ</del></div>
+            <button class="btn-product" data-id="15" data-name="Bóng đá đồ chơi mini" data-price="150000" data-img="https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=500&q=80"><i class="fas fa-cart-plus"></i> Thêm vào giỏ</button>
+          </div>
+        </div>
+
+        <div class="product-card" data-name="Bộ đồ chơi bác sĩ">
+          <div class="product-img">
+            <span class="product-badge">-24%</span>
+            <img src="https://images.unsplash.com/photo-1560850038-f95de6e715b3?auto=format&fit=crop&w=500&q=80" alt="Bộ đồ chơi bác sĩ">
+          </div>
+          <div class="product-info">
+            <h4>Bộ đồ chơi bác sĩ</h4>
+            <div class="product-price">270.000đ <del>355.000đ</del></div>
+            <button class="btn-product" data-id="16" data-name="Bộ đồ chơi bác sĩ" data-price="270000" data-img="https://images.unsplash.com/photo-1560850038-f95de6e715b3?auto=format&fit=crop&w=500&q=80"><i class="fas fa-cart-plus"></i> Thêm vào giỏ</button>
+          </div>
+        </div>
+
+        <div class="product-card" data-name="Đồ chơi lắp ráp kỹ thuật">
+          <div class="product-img">
+            <span class="product-badge">-16%</span>
+            <img src="https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?auto=format&fit=crop&w=500&q=80" alt="Đồ chơi lắp ráp kỹ thuật">
+          </div>
+          <div class="product-info">
+            <h4>Đồ chơi lắp ráp kỹ thuật</h4>
+            <div class="product-price">330.000đ <del>395.000đ</del></div>
+            <button class="btn-product" data-id="17" data-name="Đồ chơi lắp ráp kỹ thuật" data-price="330000" data-img="https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?auto=format&fit=crop&w=500&q=80"><i class="fas fa-cart-plus"></i> Thêm vào giỏ</button>
+          </div>
+        </div>
+
+        <div class="product-card" data-name="Bộ thí nghiệm khoa học">
+          <div class="product-img">
+            <span class="product-badge new">Mới</span>
+            <img src="https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?auto=format&fit=crop&w=500&q=80" alt="Bộ thí nghiệm khoa học">
+          </div>
+          <div class="product-info">
+            <h4>Bộ thí nghiệm khoa học</h4>
+            <div class="product-price">480.000đ <del>590.000đ</del></div>
+            <button class="btn-product" data-id="18" data-name="Bộ thí nghiệm khoa học" data-price="480000" data-img="https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?auto=format&fit=crop&w=500&q=80"><i class="fas fa-cart-plus"></i> Thêm vào giỏ</button>
+          </div>
+        </div>
+
+        <div class="product-card" data-name="Nhà búp bê mini 3 tầng">
+          <div class="product-img">
+            <span class="product-badge">-28%</span>
+            <img src="https://images.unsplash.com/photo-1558060370-d644479cb6f7?auto=format&fit=crop&w=500&q=80" alt="Nhà búp bê mini">
+          </div>
+          <div class="product-info">
+            <h4>Nhà búp bê mini 3 tầng</h4>
+            <div class="product-price">750.000đ <del>1.050.000đ</del></div>
+            <button class="btn-product" data-id="19" data-name="Nhà búp bê mini 3 tầng" data-price="750000" data-img="https://images.unsplash.com/photo-1558060370-d644479cb6f7?auto=format&fit=crop&w=500&q=80"><i class="fas fa-cart-plus"></i> Thêm vào giỏ</button>
+          </div>
+        </div>
+
+        <div class="product-card" data-name="Bộ đồ chơi siêu thị mini">
+          <div class="product-img">
+            <span class="product-badge">-21%</span>
+            <img src="https://images.unsplash.com/photo-1581235720704-06d3acfcb36f?auto=format&fit=crop&w=500&q=80" alt="Bộ đồ chơi siêu thị">
+          </div>
+          <div class="product-info">
+            <h4>Bộ đồ chơi siêu thị mini</h4>
+            <div class="product-price">410.000đ <del>520.000đ</del></div>
+            <button class="btn-product" data-id="20" data-name="Bộ đồ chơi siêu thị mini" data-price="410000" data-img="https://images.unsplash.com/photo-1581235720704-06d3acfcb36f?auto=format&fit=crop&w=500&q=80"><i class="fas fa-cart-plus"></i> Thêm vào giỏ</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== KHUYẾN MÃI ===== -->
+  <section class="promo-section" id="khuyen-mai">
+    <div class="container">
+      <div class="section-title">
+        <h2>Khuyến mãi hot tháng này</h2>
+        <div class="accent-line"></div>
+        <p class="subtitle">Ưu đãi hấp dẫn dành cho ba mẹ khi mua đồ chơi cho bé tại HMB Agency</p>
+      </div>
+      <div class="promo-grid">
+
+        <div class="promo-card">
+          <span class="promo-tag">HOT</span>
+          <div class="promo-img">
+            <img src="https://images.unsplash.com/photo-1607083206968-13611e3d76db?auto=format&fit=crop&w=600&q=80" alt="Combo đồ chơi xếp hình">
+          </div>
+          <div class="promo-content">
+            <h4>Combo 3 bộ xếp hình – Giảm 40%</h4>
+            <p>Mua 3 bộ xếp hình bất kỳ chỉ còn 499.000đ. Bé tha hồ sáng tạo mỗi ngày cùng bố mẹ.</p>
+            <div class="promo-condition"><i class="fas fa-clock"></i> Còn 5 ngày</div>
+            <button class="btn-promo" data-id="promo1" data-name="Combo 3 bộ xếp hình" data-price="499000" data-img="https://images.unsplash.com/photo-1607083206968-13611e3d76db?auto=format&fit=crop&w=600&q=80"><i class="fas fa-bolt"></i> Mua ngay</button>
+          </div>
+        </div>
+
+        <div class="promo-card">
+          <span class="promo-tag">FREESHIP</span>
+          <div class="promo-img">
+            <img src="https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?auto=format&fit=crop&w=600&q=80" alt="Freeship toàn quốc">
+          </div>
+          <div class="promo-content">
+            <h4>Freeship toàn quốc từ 300K</h4>
+            <p>Miễn phí giao hàng toàn quốc cho mọi đơn hàng đồ chơi từ 300.000đ trở lên.</p>
+            <div class="promo-condition"><i class="fas fa-truck"></i> Áp dụng toàn quốc</div>
+            <button class="btn-promo" data-id="promo2" data-name="Ưu đãi Freeship" data-price="0" data-img="https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?auto=format&fit=crop&w=600&q=80"><i class="fas fa-bolt"></i> Nhận ưu đãi</button>
+          </div>
+        </div>
+
+        <div class="promo-card">
+          <span class="promo-tag">-35%</span>
+          <div class="promo-img">
+            <img src="https://images.unsplash.com/photo-1606167668584-78701c57f13d?auto=format&fit=crop&w=600&q=80" alt="Đàn piano đồ chơi">
+          </div>
+          <div class="promo-content">
+            <h4>Đàn piano đồ chơi – Giảm 35%</h4>
+            <p>Đàn piano mini giúp bé phát triển thính giác và cảm âm. Chỉ còn 520.000đ.</p>
+            <div class="promo-condition"><i class="fas fa-fire"></i> Bán chạy nhất</div>
+            <button class="btn-promo" data-id="promo3" data-name="Đàn piano đồ chơi" data-price="520000" data-img="https://images.unsplash.com/photo-1606167668584-78701c57f13d?auto=format&fit=crop&w=600&q=80"><i class="fas fa-bolt"></i> Mua ngay</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== LỢI ÍCH ===== -->
+  <section class="benefits">
+    <div class="container">
+      <div class="section-title">
+        <h2>Vì sao chọn HMB Agency?</h2>
+        <div class="accent-line"></div>
+        <p class="subtitle">Chúng tôi mang đến trải nghiệm mua sắm tốt nhất cho ba mẹ</p>
+      </div>
+      <div class="benefit-grid">
+        <div class="benefit-item">
+          <i class="fas fa-shield-alt"></i>
+          <h4>An toàn 100%</h4>
+          <p>Sản phẩm đạt chứng nhận an toàn cho trẻ nhỏ</p>
+        </div>
+        <div class="benefit-item">
+          <i class="fas fa-truck"></i>
+          <h4>Giao hàng nhanh</h4>
+          <p>Giao trong 2h tại TP.HCM và 1-2 ngày toàn quốc</p>
+        </div>
+        <div class="benefit-item">
+          <i class="fas fa-undo-alt"></i>
+          <h4>Đổi trả 7 ngày</h4>
+          <p>Miễn phí đổi trả nếu sản phẩm lỗi</p>
+        </div>
+        <div class="benefit-item">
+          <i class="fas fa-headset"></i>
+          <h4>Hỗ trợ 24/7</h4>
+          <p>Tư vấn chọn đồ chơi phù hợp với bé</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== TIN TỨC ===== -->
+  <section id="tin-tuc">
+    <div class="container">
+      <div class="section-title">
+        <h2>Tin tức & sự kiện</h2>
+        <div class="accent-line"></div>
+        <p class="subtitle">Cập nhật xu hướng đồ chơi và khuyến mãi mới nhất</p>
+      </div>
+      <div class="news-grid">
+        <div class="news-card">
+          <div class="news-img">
+            <img src="https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?auto=format&fit=crop&w=600&q=80" alt="Top đồ chơi phát triển trí tuệ">
+          </div>
+          <div class="news-content">
+            <div class="date">20/04/2025</div>
+            <h4>Top 5 đồ chơi giúp bé phát triển trí tuệ</h4>
+            <p>Khám phá những món đồ chơi được chuyên gia khuyên dùng cho bé từ 2-6 tuổi...</p>
+            <a href="#">Đọc tiếp →</a>
+          </div>
+        </div>
+        <div class="news-card">
+          <div class="news-img">
+            <img src="https://images.unsplash.com/photo-1545558014-8692077e9b5c?auto=format&fit=crop&w=600&q=80" alt="Khuyến mãi đồ chơi">
+          </div>
+          <div class="news-content">
+            <div class="date">15/04/2025</div>
+            <h4>Khuyến mãi lớn tháng 4 – Giảm đến 40%</h4>
+            <p>Hàng ngàn đồ chơi giảm giá sốc, nhanh tay đặt hàng cho bé yêu...</p>
+            <a href="#">Đọc tiếp →</a>
+          </div>
+        </div>
+        <div class="news-card">
+          <div class="news-img">
+            <img src="https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?auto=format&fit=crop&w=600&q=80" alt="Chọn đồ chơi an toàn">
+          </div>
+          <div class="news-content">
+            <div class="date">10/04/2025</div>
+            <h4>Cách chọn đồ chơi an toàn cho trẻ</h4>
+            <p>Ba mẹ nên lưu ý những tiêu chí nào khi chọn đồ chơi cho con?...</p>
+            <a href="#">Đọc tiếp →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== LIÊN HỆ ===== -->
+  <section class="contact-section" id="lien-he">
+    <div class="container">
+      <div class="section-title">
+        <h2>Liên hệ với chúng tôi</h2>
+        <div class="accent-line"></div>
+        <p class="subtitle">Gửi câu hỏi hoặc yêu cầu tư vấn, chúng tôi sẽ phản hồi sớm nhất</p>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-info">
+          <div class="contact-item">
+            <i class="fas fa-map-marker-alt"></i>
+            <div>
+              <h4>Địa chỉ</h4>
+              <p>123 Nguyễn Huệ, Quận 1, TP. Hồ Chí Minh</p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <i class="fas fa-phone-alt"></i>
+            <div>
+              <h4>Hotline</h4>
+              <p>0855 555 140</p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <i class="fas fa-envelope"></i>
+            <div>
+              <h4>Email</h4>
+              <p>hmb.agency.group@gmail.com</p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <i class="fas fa-clock"></i>
+            <div>
+              <h4>Giờ mở cửa</h4>
+              <p>8:00 – 21:00 (Thứ 2 – Chủ nhật)</p>
+            </div>
+          </div>
+        </div>
+        <div class="contact-form">
+          <form>
+            <input type="text" placeholder="Họ và tên của bạn">
+            <input type="email" placeholder="Email">
+            <input type="text" placeholder="Số điện thoại">
+            <textarea rows="4" placeholder="Nội dung cần tư vấn..."></textarea>
+            <button type="submit"><i class="fas fa-paper-plane"></i> Gửi yêu cầu</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h4>HMB AGENCY</h4>
+          <p>Cửa hàng đồ chơi trẻ em chính hãng, an toàn và phát triển trí tuệ.</p>
+          <div class="footer-social">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+            <a href="#"><i class="fab fa-tiktok"></i></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Về chúng tôi</h4>
+          <a href="#trang-chu">Giới thiệu</a>
+          <a href="#">Tuyển dụng</a>
+          <a href="#">Hệ thống cửa hàng</a>
+          <a href="#">Chính sách bảo mật</a>
+        </div>
+        <div class="footer-col">
+          <h4>Hỗ trợ khách hàng</h4>
+          <a href="#san-pham">Hướng dẫn mua hàng</a>
+          <a href="#khuyen-mai">Phương thức thanh toán</a>
+          <a href="#tin-tuc">Vận chuyển & giao nhận</a>
+          <a href="#lien-he">Đổi trả & bảo hành</a>
+        </div>
+        <div class="footer-col">
+          <h4>Liên hệ</h4>
+          <div class="footer-contact-item">
+            <i class="fas fa-phone-alt"></i>
+            <a href="tel:0855555140">Hotline: 0855 555 140</a>
+          </div>
+          <div class="footer-contact-item">
+            <i class="fas fa-envelope"></i>
+            <a href="mailto:hmb.agency.group@gmail.com">hmb.agency.group@gmail.com</a>
+          </div>
+          <div class="footer-contact-item">
+            <i class="fas fa-map-pin"></i>
+            <span>123 Nguyễn Huệ, Q.1, TP.HCM</span>
+          </div>
+        </div>
+      </div>
+      <div class="copyright">
+        © 2025 HMB Agency – Cửa hàng đồ chơi trẻ em. Thiết kế tham khảo pccc.autofb81.com.
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============================================
+       MOBILE NAV DRAWER
+  ============================================ -->
+  <div class="mobile-nav-overlay" id="mobileNavOverlay"></div>
+  <aside class="mobile-nav" id="mobileNav">
+    <div class="mobile-nav-header">
+      <div class="mobile-logo">
+        <div class="logo-icon">HMB</div>
+        <h3>HMB Agency</h3>
+      </div>
+      <button class="mobile-nav-close" id="mobileNavClose" aria-label="Đóng menu">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    <nav class="mobile-nav-links">
+      <a href="#trang-chu" class="mobile-nav-link active"><i class="fas fa-home"></i> Trang chủ</a>
+      <a href="#san-pham" class="mobile-nav-link"><i class="fas fa-box-open"></i> Sản phẩm</a>
+      <a href="#khuyen-mai" class="mobile-nav-link"><i class="fas fa-tags"></i> Khuyến mãi</a>
+      <a href="#tin-tuc" class="mobile-nav-link"><i class="fas fa-newspaper"></i> Tin tức</a>
+      <a href="#lien-he" class="mobile-nav-link"><i class="fas fa-headset"></i> Liên hệ</a>
+    </nav>
+    <div class="mobile-nav-footer">
+      <div class="m-contact">
+        <i class="fas fa-phone-alt"></i>
+        <a href="tel:0855555140">0855 555 140</a>
+      </div>
+      <div class="m-contact">
+        <i class="fas fa-envelope"></i>
+        <a href="mailto:hmb.agency.group@gmail.com">hmb.agency.group@gmail.com</a>
+      </div>
+      <div class="m-contact">
+        <i class="fas fa-map-pin"></i>
+        <span>123 Nguyễn Huệ, Q.1, TP.HCM</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ============================================
+       CART POPUP
+  ============================================ -->
+  <div class="popup-overlay" id="cartOverlay"></div>
+
+  <div class="cart-popup" id="cartPopup">
+    <div class="cart-header">
+      <h3><i class="fas fa-shopping-cart"></i> Giỏ hàng của bạn</h3>
+      <button class="cart-close" id="cartClose" aria-label="Đóng giỏ hàng"><i class="fas fa-times"></i></button>
+    </div>
+
+    <div class="cart-body" id="cartBody"></div>
+
+    <div class="cart-footer" id="cartFooter">
+      <div class="cart-total-row">
+        <span>Tổng cộng:</span>
+        <strong id="cartTotal">0đ</strong>
+      </div>
+      <div class="cart-actions">
+        <button class="btn-clear-cart" id="btnClearCart"><i class="fas fa-trash-alt"></i> Xóa hết</button>
+        <button class="btn-checkout" id="btnCheckout"><i class="fas fa-check-circle"></i> Thanh toán</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================
+       SUCCESS POPUP
+  ============================================ -->
+  <div class="success-popup" id="successPopup">
+    <div class="success-icon">
+      <i class="fas fa-check"></i>
+    </div>
+    <h3>Thanh toán thành công!</h3>
+    <p>Cảm ơn bạn đã mua sắm tại <strong>HMB Agency</strong>. Đơn hàng của bạn đang được xử lý.</p>
+    <div class="success-order-code">
+      <span>Mã đơn hàng:</span>
+      <strong id="orderCode">#HMB000000</strong>
+    </div>
+    <div class="success-total">
+      Tổng thanh toán: <strong id="successTotal">0đ</strong>
+    </div>
+    <button class="btn-success-close" id="btnSuccessClose"><i class="fas fa-thumbs-up"></i> Hoàn tất</button>
+  </div>
+
+  <!-- ===== TOAST ===== -->
+  <div class="toast" id="toast">
+    <i class="fas fa-check-circle"></i>
+    <span id="toastMsg">Đã thêm vào giỏ hàng!</span>
+  </div>
+
+  <script>
+    /* ============================================
+       CART LOGIC
+    ============================================ */
+    const cart = {};
+
+    const cartIconBtn  = document.getElementById('cartIconBtn');
+    const cartBadge    = document.getElementById('cartBadge');
+    const cartOverlay  = document.getElementById('cartOverlay');
+    const cartPopup    = document.getElementById('cartPopup');
+    const cartClose    = document.getElementById('cartClose');
+    const cartBody     = document.getElementById('cartBody');
+    const cartFooter   = document.getElementById('cartFooter');
+    const cartTotal    = document.getElementById('cartTotal');
+    const btnClearCart = document.getElementById('btnClearCart');
+    const btnCheckout  = document.getElementById('btnCheckout');
+    const successPopup = document.getElementById('successPopup');
+    const btnSuccessClose = document.getElementById('btnSuccessClose');
+    const orderCode    = document.getElementById('orderCode');
+    const successTotal = document.getElementById('successTotal');
+    const toast        = document.getElementById('toast');
+    const toastMsg     = document.getElementById('toastMsg');
+
+    function formatPrice(num) {
+      return num.toLocaleString('vi-VN') + 'đ';
+    }
+
+    let toastTimer;
+    function showToast(msg) {
+      toastMsg.textContent = msg;
+      toast.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.classList.remove('show'), 2200);
+    }
+
+    function updateBadge() {
+      const totalQty = Object.values(cart).reduce((sum, item) => sum + item.qty, 0);
+      cartBadge.textContent = totalQty;
+      cartBadge.style.display = totalQty > 0 ? 'flex' : 'none';
+      cartBadge.classList.remove('bump');
+      void cartBadge.offsetWidth;
+      cartBadge.classList.add('bump');
+    }
+
+    function renderCart() {
+      const items = Object.values(cart);
+
+      if (items.length === 0) {
+        cartBody.innerHTML = `
+          <div class="cart-empty">
+            <i class="fas fa-shopping-basket"></i>
+            <p>Giỏ hàng của bạn đang trống.<br>Hãy thêm đồ chơi yêu thích nhé!</p>
+          </div>
+        `;
+        cartFooter.style.display = 'none';
+        return;
+      }
+
+      cartFooter.style.display = 'block';
+
+      let html = '';
+      let total = 0;
+
+      items.forEach(item => {
+        const itemTotal = item.price * item.qty;
+        total += itemTotal;
+        html += `
+          <div class="cart-item">
+            <div class="cart-item-img">
+              <img src="${item.img}" alt="${item.name}">
+            </div>
+            <div class="cart-item-info">
+              <h5>${item.name}</h5>
+              <div class="item-price">${formatPrice(item.price)}</div>
+              <div class="cart-item-total">= ${formatPrice(itemTotal)}</div>
+            </div>
+            <div class="cart-item-actions">
+              <div class="qty-control">
+                <button data-action="decrease" data-id="${item.id}"><i class="fas fa-minus"></i></button>
+                <span>${item.qty}</span>
+                <button data-action="increase" data-id="${item.id}"><i class="fas fa-plus"></i></button>
+              </div>
+              <button class="cart-item-remove" data-action="remove" data-id="${item.id}">
+                <i class="fas fa-trash-alt"></i> Xóa
+              </button>
+            </div>
+          </div>
+        `;
+      });
+
+      cartBody.innerHTML = html;
+      cartTotal.textContent = formatPrice(total);
+    }
+
+    function addToCart(id, name, price, img) {
+      if (cart[id]) {
+        cart[id].qty += 1;
+      } else {
+        cart[id] = { id, name, price, img, qty: 1 };
+      }
+      updateBadge();
+      renderCart();
+      showToast(`Đã thêm "${name}" vào giỏ!`);
+    }
+
+    function openCart() {
+      renderCart();
+      cartOverlay.classList.add('active');
+      cartPopup.classList.add('active');
+      document.body.classList.add('no-scroll');
+    }
+
+    function closeCart() {
+      cartOverlay.classList.remove('active');
+      cartPopup.classList.remove('active');
+      document.body.classList.remove('no-scroll');
+    }
+
+    function closeSuccess() {
+      successPopup.classList.remove('active');
+      document.body.classList.remove('no-scroll');
+    }
+
+    document.querySelectorAll('.btn-product').forEach(btn => {
+      btn.addEventListener('click', function () {
+        const id = this.dataset.id;
+        const name = this.dataset.name;
+        const price = parseInt(this.dataset.price, 10);
+        const img = this.dataset.img;
+
+        addToCart(id, name, price, img);
+
+        const originalHTML = this.innerHTML;
+        this.classList.add('added');
+        this.innerHTML = '<i class="fas fa-check"></i> Đã thêm';
+        setTimeout(() => {
+          this.classList.remove('added');
+          this.innerHTML = originalHTML;
+        }, 1200);
+      });
+    });
+
+    document.querySelectorAll('.btn-promo').forEach(btn => {
+      btn.addEventListener('click', function () {
+        const id = this.dataset.id;
+        const name = this.dataset.name;
+        const price = parseInt(this.dataset.price, 10);
+        const img = this.dataset.img;
+
+        addToCart(id, name, price, img);
+        setTimeout(openCart, 500);
+      });
+    });
+
+    cartBody.addEventListener('click', function (e) {
+      const btn = e.target.closest('button');
+      if (!btn) return;
+
+      const action = btn.dataset.action;
+      const id = btn.dataset.id;
+      if (!action || !id || !cart[id]) return;
+
+      if (action === 'increase') {
+        cart[id].qty += 1;
+      } else if (action === 'decrease') {
+        cart[id].qty -= 1;
+        if (cart[id].qty <= 0) delete cart[id];
+      } else if (action === 'remove') {
+        delete cart[id];
+      }
+
+      updateBadge();
+      renderCart();
+    });
+
+    cartIconBtn.addEventListener('click', openCart);
+    cartClose.addEventListener('click', closeCart);
+    cartOverlay.addEventListener('click', () => {
+      closeCart();
+      closeSuccess();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeCart();
+        closeSuccess();
+        closeSearch();
+        closeMobileNav();
+      }
+    });
+
+    btnClearCart.addEventListener('click', function () {
+      if (Object.keys(cart).length === 0) return;
+      if (confirm('Bạn có chắc muốn xóa toàn bộ giỏ hàng?')) {
+        Object.keys(cart).forEach(k => delete cart[k]);
+        updateBadge();
+        renderCart();
+        showToast('Đã xóa toàn bộ giỏ hàng!');
+      }
+    });
+
+    /* ============================================
+       THANH TOÁN
+    ============================================ */
+    btnCheckout.addEventListener('click', function () {
+      const items = Object.values(cart);
+      const totalQty = items.reduce((sum, item) => sum + item.qty, 0);
+
+      if (totalQty === 0) {
+        showToast('Giỏ hàng đang trống!');
+        return;
+      }
+
+      const total = items.reduce((sum, item) => sum + item.price * item.qty, 0);
+
+      const randomCode = Math.floor(100000 + Math.random() * 900000);
+      orderCode.textContent = '#HMB' + randomCode;
+      successTotal.textContent = formatPrice(total);
+
+      closeCart();
+      successPopup.classList.add('active');
+      document.body.classList.add('no-scroll');
+
+      Object.keys(cart).forEach(k => delete cart[k]);
+      updateBadge();
+      renderCart();
+    });
+
+    btnSuccessClose.addEventListener('click', closeSuccess);
+
+    /* ============================================
+       SEARCH
+    ============================================ */
+    const searchToggle  = document.getElementById('searchToggle');
+    const searchBox     = document.getElementById('searchBox');
+    const searchInput   = document.getElementById('searchInput');
+    const searchResults = document.getElementById('searchResults');
+    const allProducts   = Array.from(document.querySelectorAll('.product-card'));
+
+    // Lấy dữ liệu sản phẩm
+    const productData = allProducts.map(card => {
+      const btn = card.querySelector('.btn-product');
+      return {
+        id: btn.dataset.id,
+        name: btn.dataset.name,
+        price: parseInt(btn.dataset.price, 10),
+        img: btn.dataset.img
+      };
+    });
+
+    function openSearch() {
+      searchBox.classList.add('active');
+      setTimeout(() => searchInput.focus(), 100);
+    }
+
+    function closeSearch() {
+      searchBox.classList.remove('active');
+      searchInput.value = '';
+      searchResults.innerHTML = '';
+    }
+
+    searchToggle.addEventListener('click', function (e) {
+      e.stopPropagation();
+      if (searchBox.classList.contains('active')) {
+        closeSearch();
+      } else {
+        openSearch();
+      }
+    });
+
+    // Click ra ngoài đóng search
+    document.addEventListener('click', function (e) {
+      if (!searchBox.contains(e.target) && !searchToggle.contains(e.target)) {
+        closeSearch();
+      }
+    });
+
+    searchBox.addEventListener('click', function (e) {
+      e.stopPropagation();
+    });
+
+    function removeAccents(str) {
+      return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/đ/g, 'd').replace(/Đ/g, 'D');
+    }
+
+    function renderSearchResults(keyword) {
+      const kw = removeAccents(keyword.toLowerCase().trim());
+
+      if (!kw) {
+        searchResults.innerHTML = '';
+        return;
+      }
+
+      const matched = productData.filter(p =>
+        removeAccents(p.name.toLowerCase()).includes(kw)
+      );
+
+      if (matched.length === 0) {
+        searchResults.innerHTML = `
+          <div class="search-empty">
+            <i class="fas fa-search-minus"></i>
+            Không tìm thấy sản phẩm "<strong>${keyword}</strong>"
+          </div>
+        `;
+        return;
+      }
+
+      searchResults.innerHTML = matched.map(p => `
+        <div class="search-result-item" data-id="${p.id}">
+          <div class="search-result-img">
+            <img src="${p.img}" alt="${p.name}">
+          </div>
+          <div class="search-result-info">
+            <h5>${p.name}</h5>
+            <span>${formatPrice(p.price)}</span>
+          </div>
+          <button class="btn-product" data-id="${p.id}" data-name="${p.name}" data-price="${p.price}" data-img="${p.img}" style="border:none;background:var(--accent);color:#fff;padding:6px 12px;border-radius:30px;font-size:0.72rem;font-weight:700;cursor:pointer;flex-shrink:0;">
+            <i class="fas fa-cart-plus"></i>
+          </button>
+        </div>
+      `).join('');
+    }
+
+    searchInput.addEventListener('input', function () {
+      renderSearchResults(this.value);
+    });
+
+    // Click vào kết quả tìm kiếm
+    searchResults.addEventListener('click', function (e) {
+      // Nếu click vào nút thêm giỏ
+      const addBtn = e.target.closest('.btn-product');
+      if (addBtn) {
+        e.stopPropagation();
+        addToCart(addBtn.dataset.id, addBtn.dataset.name, parseInt(addBtn.dataset.price, 10), addBtn.dataset.img);
+        addBtn.innerHTML = '<i class="fas fa-check"></i>';
+        addBtn.style.background = 'var(--success)';
+        return;
+      }
+
+      // Nếu click vào item → cuộn đến sản phẩm
+      const item = e.target.closest('.search-result-item');
+      if (item) {
+        const id = item.dataset.id;
+        const targetCard = document.querySelector(`.product-card .btn-product[data-id="${id}"]`)?.closest('.product-card');
+        if (targetCard) {
+          closeSearch();
+          const headerHeight = document.querySelector('.main-header').offsetHeight;
+          const top = targetCard.getBoundingClientRect().top + window.pageYOffset - headerHeight - 20;
+          window.scrollTo({ top, behavior: 'smooth' });
+          // Highlight
+          targetCard.style.transition = 'box-shadow 0.3s';
+          targetCard.style.boxShadow = '0 0 0 4px rgba(230, 57, 70, 0.4)';
+          setTimeout(() => { targetCard.style.boxShadow = ''; }, 1500);
+        }
+      }
+    });
+
+    /* ============================================
+       MOBILE NAV
+    ============================================ */
+    const hamburgerBtn = document.getElementById('hamburgerBtn');
+    const mobileNav = document.getElementById('mobileNav');
+    const mobileNavOverlay = document.getElementById('mobileNavOverlay');
+    const mobileNavClose = document.getElementById('mobileNavClose');
+
+    function openMobileNav() {
+      mobileNav.classList.add('active');
+      mobileNavOverlay.classList.add('active');
+      document.body.classList.add('no-scroll');
+    }
+
+    function closeMobileNav() {
+      mobileNav.classList.remove('active');
+      mobileNavOverlay.classList.remove('active');
+      document.body.classList.remove('no-scroll');
+    }
+
+    hamburgerBtn.addEventListener('click', openMobileNav);
+    mobileNavClose.addEventListener('click', closeMobileNav);
+    mobileNavOverlay.addEventListener('click', closeMobileNav);
+
+    /* ============================================
+       NAV LINKS – cuộn đến section
+    ============================================ */
+    function scrollToSection(href) {
+      const target = document.querySelector(href);
+      if (target) {
+        const headerHeight = document.querySelector('.main-header').offsetHeight;
+        const top = target.getBoundingClientRect().top + window.pageYOffset - headerHeight - 10;
+        window.scrollTo({ top, behavior: 'smooth' });
+      }
+    }
+
+    // Desktop nav
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', function (e) {
+        e.preventDefault();
+        scrollToSection(this.getAttribute('href'));
+        document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+        this.classList.add('active');
+      });
+    });
+
+    // Mobile nav
+    document.querySelectorAll('.mobile-nav-link').forEach(link => {
+      link.addEventListener('click', function (e) {
+        e.preventDefault();
+        closeMobileNav();
+        const href = this.getAttribute('href');
+        setTimeout(() => scrollToSection(href), 350);
+        document.querySelectorAll('.mobile-nav-link').forEach(l => l.classList.remove('active'));
+        this.classList.add('active');
+      });
+    });
+
+    /* ---- Active state khi cuộn ---- */
+    const sections = document.querySelectorAll('section[id]');
+    window.addEventListener('scroll', () => {
+      const scrollPos = window.pageYOffset + 130;
+      let currentId = 'trang-chu';
+      sections.forEach(sec => {
+        if (sec.offsetTop <= scrollPos) {
+          currentId = sec.getAttribute('id');
+        }
+      });
+      document.querySelectorAll('.nav-link').forEach(l => {
+        l.classList.toggle('active', l.getAttribute('href') === '#' + currentId);
+      });
+      document.querySelectorAll('.mobile-nav-link').forEach(l => {
+        l.classList.toggle('active', l.getAttribute('href') === '#' + currentId);
+      });
+    });
+
+    /* ---- Khởi tạo ---- */
+    updateBadge();
+    renderCart();
+  </script>
+
+</body>
+</html>
