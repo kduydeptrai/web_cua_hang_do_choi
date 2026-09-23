@@ -140,7 +140,6 @@
       letter-spacing: 0.4px;
     }
 
-    /* ---- NAV LINKS (desktop) ---- */
     .nav-links {
       display: flex;
       gap: 28px;
@@ -163,7 +162,6 @@
       border-bottom-color: var(--accent);
     }
 
-    /* ---- HEADER ACTIONS ---- */
     .header-actions {
       display: flex;
       align-items: center;
@@ -395,7 +393,6 @@
       text-align: center;
     }
 
-    /* ---- HAMBURGER ---- */
     .hamburger {
       display: none;
       background: transparent;
@@ -705,25 +702,6 @@
       background: var(--success);
       border-color: var(--success);
       color: #fff;
-    }
-
-    /* ---- NO RESULT ---- */
-    .no-result {
-      grid-column: 1 / -1;
-      text-align: center;
-      padding: 50px 20px;
-      color: var(--text-muted);
-    }
-
-    .no-result i {
-      font-size: 3rem;
-      color: #cbd5e1;
-      margin-bottom: 14px;
-      display: block;
-    }
-
-    .no-result strong {
-      color: var(--primary);
     }
 
     /* ===== KHUYẾN MÃI ===== */
@@ -1586,7 +1564,9 @@
       transform: translateY(-2px);
     }
 
-    /* ===== TOAST ===== */
+    /* ============================================
+       TOAST (FIX TRIỆT ĐỂ)
+    ============================================ */
     .toast {
       position: fixed;
       bottom: 28px;
@@ -1603,13 +1583,20 @@
       font-weight: 600;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
       z-index: 1200;
-      transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
       pointer-events: none;
       max-width: 90vw;
+      opacity: 0;
+      visibility: hidden;
+      transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+                  opacity 0.35s ease,
+                  visibility 0.35s ease;
+      will-change: transform, opacity;
     }
 
     .toast.show {
       transform: translateX(-50%) translateY(0);
+      opacity: 1;
+      visibility: visible;
     }
 
     .toast i {
@@ -1619,7 +1606,7 @@
     }
 
     /* ============================================
-       MOBILE NAV MENU (hamburger drawer)
+       MOBILE NAV
     ============================================ */
     .mobile-nav-overlay {
       position: fixed;
@@ -1767,17 +1754,14 @@
        RESPONSIVE
     ============================================ */
     @media (max-width: 900px) {
-      /* Hamburger hiện */
       .hamburger {
         display: flex;
       }
 
-      /* Ẩn nav desktop */
       .nav-links {
         display: none;
       }
 
-      /* Header layout mobile */
       .main-header .container {
         padding: 12px 16px;
         gap: 12px;
@@ -1829,7 +1813,6 @@
       }
     }
 
-    /* === MOBILE: 2 sản phẩm / hàng, kích thước cố định === */
     @media (max-width: 640px) {
       .top-bar .container {
         flex-direction: column;
@@ -1892,7 +1875,6 @@
         font-size: 0.9rem;
       }
 
-      /* Search box mobile */
       .search-box {
         position: fixed;
         top: 80px;
@@ -1902,7 +1884,7 @@
         max-width: none;
       }
 
-      /* ====== LƯỚI SẢN PHẨM: 2 CỘT CỐ ĐỊNH ====== */
+      /* LƯỚI SẢN PHẨM: 2 CỘT CỐ ĐỊNH */
       .product-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 12px;
@@ -1949,7 +1931,6 @@
         gap: 4px;
       }
 
-      /* Danh mục: 2 cột */
       .category-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 12px;
@@ -1964,19 +1945,16 @@
         padding: 10px 6px;
       }
 
-      /* Khuyến mãi: 1 cột */
       .promo-grid {
         grid-template-columns: 1fr;
         gap: 20px;
       }
 
-      /* Tin tức: 1 cột */
       .news-grid {
         grid-template-columns: 1fr;
         gap: 20px;
       }
 
-      /* Lợi ích: 2 cột */
       .benefit-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 14px;
@@ -1999,7 +1977,6 @@
         font-size: 0.78rem;
       }
 
-      /* Cart popup mobile */
       .cart-popup {
         width: 95%;
         max-height: 92vh;
@@ -2051,7 +2028,6 @@
       }
     }
 
-    /* Màn hình siêu nhỏ */
     @media (max-width: 360px) {
       .product-grid {
         gap: 10px;
@@ -2111,7 +2087,6 @@
       </nav>
 
       <div class="header-actions">
-        <!-- SEARCH -->
         <div class="search-wrap">
           <button class="search-toggle" id="searchToggle" aria-label="Tìm kiếm">
             <i class="fas fa-search"></i>
@@ -2126,13 +2101,11 @@
           </div>
         </div>
 
-        <!-- CART -->
         <div class="cart-icon-wrap" id="cartIconBtn" title="Xem giỏ hàng">
           <i class="fas fa-shopping-cart"></i>
           <span class="cart-badge" id="cartBadge">0</span>
         </div>
 
-        <!-- HAMBURGER (mobile) -->
         <button class="hamburger" id="hamburgerBtn" aria-label="Mở menu">
           <i class="fas fa-bars"></i>
         </button>
@@ -2812,21 +2785,54 @@
     const btnSuccessClose = document.getElementById('btnSuccessClose');
     const orderCode    = document.getElementById('orderCode');
     const successTotal = document.getElementById('successTotal');
-    const toast        = document.getElementById('toast');
-    const toastMsg     = document.getElementById('toastMsg');
+    const toastEl      = document.getElementById('toast');
+    const toastMsgEl   = document.getElementById('toastMsg');
 
     function formatPrice(num) {
       return num.toLocaleString('vi-VN') + 'đ';
     }
 
-    let toastTimer;
+    /* ============================================
+       TOAST - FIX TRIỆT ĐỂ
+       Luôn tự ẩn sau 2s, kể cả khi bấm liên tục
+    ============================================ */
+    let toastTimer = null;
+
     function showToast(msg) {
-      toastMsg.textContent = msg;
-      toast.classList.add('show');
-      clearTimeout(toastTimer);
-      toastTimer = setTimeout(() => toast.classList.remove('show'), 2200);
+      // 1. Cập nhật nội dung
+      toastMsgEl.textContent = msg;
+
+      // 2. Clear timer cũ
+      if (toastTimer) {
+        clearTimeout(toastTimer);
+        toastTimer = null;
+      }
+
+      // 3. Force reflow để reset animation
+      toastEl.classList.remove('show');
+      void toastEl.offsetHeight;
+
+      // 4. Hiện toast
+      toastEl.classList.add('show');
+
+      // 5. Tự ẩn sau 2 giây
+      toastTimer = setTimeout(() => {
+        toastEl.classList.remove('show');
+        toastTimer = null;
+      }, 2000);
     }
 
+    function hideToast() {
+      if (toastTimer) {
+        clearTimeout(toastTimer);
+        toastTimer = null;
+      }
+      toastEl.classList.remove('show');
+    }
+
+    /* ============================================
+       BADGE
+    ============================================ */
     function updateBadge() {
       const totalQty = Object.values(cart).reduce((sum, item) => sum + item.qty, 0);
       cartBadge.textContent = totalQty;
@@ -2836,6 +2842,9 @@
       cartBadge.classList.add('bump');
     }
 
+    /* ============================================
+       RENDER CART
+    ============================================ */
     function renderCart() {
       const items = Object.values(cart);
 
@@ -2886,6 +2895,9 @@
       cartTotal.textContent = formatPrice(total);
     }
 
+    /* ============================================
+       ADD TO CART
+    ============================================ */
     function addToCart(id, name, price, img) {
       if (cart[id]) {
         cart[id].qty += 1;
@@ -2897,7 +2909,11 @@
       showToast(`Đã thêm "${name}" vào giỏ!`);
     }
 
+    /* ============================================
+       OPEN / CLOSE POPUP
+    ============================================ */
     function openCart() {
+      hideToast();
       renderCart();
       cartOverlay.classList.add('active');
       cartPopup.classList.add('active');
@@ -2915,6 +2931,9 @@
       document.body.classList.remove('no-scroll');
     }
 
+    /* ============================================
+       EVENT: Nút "Thêm vào giỏ"
+    ============================================ */
     document.querySelectorAll('.btn-product').forEach(btn => {
       btn.addEventListener('click', function () {
         const id = this.dataset.id;
@@ -2934,6 +2953,9 @@
       });
     });
 
+    /* ============================================
+       EVENT: Nút "Mua ngay" khuyến mãi
+    ============================================ */
     document.querySelectorAll('.btn-promo').forEach(btn => {
       btn.addEventListener('click', function () {
         const id = this.dataset.id;
@@ -2946,6 +2968,9 @@
       });
     });
 
+    /* ============================================
+       EVENT: Tăng/giảm/xóa trong giỏ
+    ============================================ */
     cartBody.addEventListener('click', function (e) {
       const btn = e.target.closest('button');
       if (!btn) return;
@@ -2967,6 +2992,9 @@
       renderCart();
     });
 
+    /* ============================================
+       EVENT: Mở/đóng giỏ, ESC
+    ============================================ */
     cartIconBtn.addEventListener('click', openCart);
     cartClose.addEventListener('click', closeCart);
     cartOverlay.addEventListener('click', () => {
@@ -2982,6 +3010,9 @@
       }
     });
 
+    /* ============================================
+       EVENT: Xóa hết giỏ
+    ============================================ */
     btnClearCart.addEventListener('click', function () {
       if (Object.keys(cart).length === 0) return;
       if (confirm('Bạn có chắc muốn xóa toàn bộ giỏ hàng?')) {
@@ -3030,7 +3061,6 @@
     const searchResults = document.getElementById('searchResults');
     const allProducts   = Array.from(document.querySelectorAll('.product-card'));
 
-    // Lấy dữ liệu sản phẩm
     const productData = allProducts.map(card => {
       const btn = card.querySelector('.btn-product');
       return {
@@ -3061,7 +3091,6 @@
       }
     });
 
-    // Click ra ngoài đóng search
     document.addEventListener('click', function (e) {
       if (!searchBox.contains(e.target) && !searchToggle.contains(e.target)) {
         closeSearch();
@@ -3118,9 +3147,7 @@
       renderSearchResults(this.value);
     });
 
-    // Click vào kết quả tìm kiếm
     searchResults.addEventListener('click', function (e) {
-      // Nếu click vào nút thêm giỏ
       const addBtn = e.target.closest('.btn-product');
       if (addBtn) {
         e.stopPropagation();
@@ -3130,7 +3157,6 @@
         return;
       }
 
-      // Nếu click vào item → cuộn đến sản phẩm
       const item = e.target.closest('.search-result-item');
       if (item) {
         const id = item.dataset.id;
@@ -3140,7 +3166,6 @@
           const headerHeight = document.querySelector('.main-header').offsetHeight;
           const top = targetCard.getBoundingClientRect().top + window.pageYOffset - headerHeight - 20;
           window.scrollTo({ top, behavior: 'smooth' });
-          // Highlight
           targetCard.style.transition = 'box-shadow 0.3s';
           targetCard.style.boxShadow = '0 0 0 4px rgba(230, 57, 70, 0.4)';
           setTimeout(() => { targetCard.style.boxShadow = ''; }, 1500);
@@ -3184,7 +3209,6 @@
       }
     }
 
-    // Desktop nav
     document.querySelectorAll('.nav-link').forEach(link => {
       link.addEventListener('click', function (e) {
         e.preventDefault();
@@ -3194,7 +3218,6 @@
       });
     });
 
-    // Mobile nav
     document.querySelectorAll('.mobile-nav-link').forEach(link => {
       link.addEventListener('click', function (e) {
         e.preventDefault();
